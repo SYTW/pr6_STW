@@ -10,6 +10,7 @@ exports.question = function(req,res) {
 
 exports.answer = function(req, res) {
   var c = 'Incorrecto';
+  console.log("current = "+current);
   if (current.respuesta(req.query.respuesta)) { c = 'Correcto'; }
   res.render('quizes/answer', {respuesta: c})
 };
@@ -36,8 +37,9 @@ exports.specificQuestion = function(req, res) {
     res.render('quizes/SpecificQuestion', {prg: "Error en la URL."})
   }
   else {
-    var cadena = "Pregunta " + (id) + ": " + quiz.getQ(id-1);
+    current = quiz.q[id-1];
 
-    res.render('quizes/SpecificQuestion', {prg: cadena})
+    //res.render('quizes/SpecificQuestion', {prg: cadena})
+    res.render('quizes/question', {pregunta: current.pregunta});
   }
 };
